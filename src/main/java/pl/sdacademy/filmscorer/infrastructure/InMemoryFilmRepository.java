@@ -6,6 +6,6 @@ import pl.sdacademy.filmscorer.domain.FilmRepository;
 public class InMemoryFilmRepository implements FilmRepository {
     @Override
     public void saveOrThrowIfExists(Film film) {
-        //TODO
+        throw new RuntimeException("Not implemented yet!!!");
     }
 }

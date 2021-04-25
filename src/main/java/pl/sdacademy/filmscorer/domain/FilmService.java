@@ -1,5 +1,7 @@
 package pl.sdacademy.filmscorer.domain;
 
+import pl.sdacademy.filmscorer.infrastructure.DuplicatedKeyException;
+
 public class FilmService {
 
     private final FilmRepository filmRepository;
@@ -11,7 +13,7 @@ public class FilmService {
     public void addFilm(String title, int releaseYear) {
         try {
             filmRepository.saveOrThrowIfExists(new Film(title, releaseYear));
-        } catch (Exception exception){
+        } catch (DuplicatedKeyException exception){
             throw new DuplicatedFilmException("Trying to add film that already exists", exception);
         }
     }
