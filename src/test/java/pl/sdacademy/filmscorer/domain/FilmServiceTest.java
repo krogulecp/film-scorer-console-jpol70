@@ -2,6 +2,7 @@ package pl.sdacademy.filmscorer.domain;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 
 class FilmServiceTest {
 
@@ -10,6 +11,7 @@ class FilmServiceTest {
 
     @BeforeEach
     void setup(){
+        filmRepository = Mockito.mock(FilmRepository.class);
         filmService = new FilmService(filmRepository);
     }
 
@@ -23,5 +25,6 @@ class FilmServiceTest {
         filmService.addFilm(title, releaseYear);
 
         //then
+        Mockito.verify(filmRepository, Mockito.times(1)).saveOrThrowIfExists(new Film(title, releaseYear));
     }
 }
