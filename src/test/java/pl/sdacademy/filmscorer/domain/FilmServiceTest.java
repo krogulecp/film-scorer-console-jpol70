@@ -27,4 +27,6 @@ class FilmServiceTest {
         //then
         Mockito.verify(filmRepository, Mockito.times(1)).saveOrThrowIfExists(new Film(title, releaseYear));
     }
+
+    //TODO should throw DuplicatedFilmException when trying to add same film twice
 }
