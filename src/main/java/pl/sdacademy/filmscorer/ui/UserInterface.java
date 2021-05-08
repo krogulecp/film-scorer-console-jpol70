@@ -19,14 +19,30 @@ public class UserInterface {
         while (shouldContinue) {
             System.out.println("Co chciałbyś zrobić:");
             System.out.println("1 -> dodać film do bazy");
+            System.out.println("2 -> pobrać film z bazy");
             final int selectedOption = input.nextInt();
             switch (selectedOption){
                 case 1:
                     addFilmCase();
                     break;
+                case 2:
+                    getFilmCase();
+                    break;
             }
             shouldContinue = shouldContinue();
         }
+    }
+
+    private void getFilmCase() {
+        System.out.println("Podaj tytuł");
+        final String title = input.next();
+        System.out.println("Podaj rok produkcji");
+        final int releaseYear = input.nextInt();
+        filmService.getFilm(title, releaseYear)
+                .ifPresentOrElse(
+                        film -> System.out.println("Znaleziono film " + film),
+                        () -> System.out.println("Film o tytule " + title + " i roku wydania " + releaseYear + " nie znaleziony!")
+                );
     }
 
     private void addFilmCase() {

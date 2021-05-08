@@ -32,5 +32,13 @@ public class Film {
     public int hashCode() {
         return Objects.hash(title, releaseYear);
     }
+
+    @Override
+    public String toString() {
+        return "Film{" +
+                "title='" + title + '\'' +
+                ", releaseYear=" + releaseYear +
+                '}';
+    }
 }
 
