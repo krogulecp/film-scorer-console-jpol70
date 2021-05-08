@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 public class InMemoryFilmRepository implements FilmRepository {
 
@@ -29,8 +30,8 @@ public class InMemoryFilmRepository implements FilmRepository {
     }
 
     @Override
-    public Film findByTitleAndReleaseYear(String title, int releaseYear) {
-        return films.get(constructKey(title, releaseYear));
+    public Optional<Film> findByTitleAndReleaseYear(String title, int releaseYear) {
+        return Optional.ofNullable(films.get(constructKey(title, releaseYear)));
     }
 
     private String constructKey(Film film) {

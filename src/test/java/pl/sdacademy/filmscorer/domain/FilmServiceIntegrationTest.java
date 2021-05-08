@@ -1,10 +1,12 @@
 package pl.sdacademy.filmscorer.domain;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import pl.sdacademy.filmscorer.infrastructure.InMemoryFilmRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -37,7 +39,8 @@ class FilmServiceIntegrationTest {
         filmService.addFilm(SampleFilm.SAMPLE_FILM_TITLE, SampleFilm.SAMPLE_RELEASE_YEAR);
 
         //then
-        final Film foundFilm = filmService.getFilm(SampleFilm.SAMPLE_FILM_TITLE, SampleFilm.SAMPLE_RELEASE_YEAR);
-        assertEquals(SampleFilm.defaultFilm(), foundFilm);
+        final Optional<Film> foundFilm = filmService.getFilm(SampleFilm.SAMPLE_FILM_TITLE, SampleFilm.SAMPLE_RELEASE_YEAR);
+        Assertions.assertTrue(foundFilm.isPresent());
+        assertEquals(SampleFilm.defaultFilm(), foundFilm.get());
     }
 }
