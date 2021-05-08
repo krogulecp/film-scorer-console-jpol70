@@ -20,6 +20,7 @@ public class App {
                         new GetFilmsByTitleCaseHandler(scanner, filmService),
                         new GetFilmCaseHandler(scanner, filmService),
                         new AddFilmCaseHandler(scanner, filmService)
+                        // TODO zrobienie ścieżki dla wyciągnięcia wszystkich filmów po roku produkcji
                 )
         );
         userInterface.start();
