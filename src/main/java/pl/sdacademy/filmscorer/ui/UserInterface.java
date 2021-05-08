@@ -20,6 +20,7 @@ public class UserInterface {
             System.out.println("Co chciałbyś zrobić:");
             System.out.println("1 -> dodać film do bazy");
             System.out.println("2 -> pobrać film z bazy");
+            System.out.println("3 -> pobrać wszystkie filmy o danym tytule");
             final int selectedOption = input.nextInt();
             switch (selectedOption){
                 case 1:
@@ -28,9 +29,16 @@ public class UserInterface {
                 case 2:
                     getFilmCase();
                     break;
+                case 3:
+                    getFilmsByTitleCase();
+                    break;
             }
             shouldContinue = shouldContinue();
         }
+    }
+
+    private void getFilmsByTitleCase() {
+        //TODO
     }
 
     private void getFilmCase() {
