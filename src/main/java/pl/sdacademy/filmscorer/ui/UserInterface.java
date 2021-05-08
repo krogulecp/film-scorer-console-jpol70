@@ -1,18 +1,15 @@
 package pl.sdacademy.filmscorer.ui;
 
-import pl.sdacademy.filmscorer.domain.Film;
-import pl.sdacademy.filmscorer.domain.FilmService;
-
-import java.util.List;
 import java.util.Scanner;
+import java.util.Set;
 
 public class UserInterface {
-    private final FilmService filmService;
     private final Scanner input;
+    private final Set<CaseHandler> caseHandlers;
 
-    public UserInterface(FilmService filmService, Scanner input) {
-        this.filmService = filmService;
+    public UserInterface(Scanner input, Set<CaseHandler> caseHandlers) {
         this.input = input;
+        this.caseHandlers = caseHandlers;
     }
 
     public void start() {
@@ -20,54 +17,13 @@ public class UserInterface {
         System.out.println("Witam w aplikacji do oceny filmów!");
         while (shouldContinue) {
             System.out.println("Co chciałbyś zrobić:");
-            System.out.println("1 -> dodać film do bazy");
-            System.out.println("2 -> pobrać film z bazy");
-            System.out.println("3 -> pobrać wszystkie filmy o danym tytule");
+            caseHandlers.forEach(handler -> System.out.println(handler.getId() + " -> " + handler.getTitle()));
             final int selectedOption = input.nextInt();
-            switch (selectedOption){
-                case 1:
-                    addFilmCase();
-                    break;
-                case 2:
-                    getFilmCase();
-                    break;
-                case 3:
-                    getFilmsByTitleCase();
-                    break;
-            }
+            caseHandlers.stream()
+                    .filter(handler -> handler.getId() == selectedOption).findFirst()
+                    .ifPresentOrElse(CaseHandler::handle, () -> System.out.println("Wybrano błędną opcję"));
+
             shouldContinue = shouldContinue();
-        }
-    }
-
-    private void getFilmsByTitleCase() {
-        System.out.println("Podaj tytuł");
-        final String title = input.next();
-        final List<Film> foundFilms = filmService.getFilmsByTitle(title);
-        System.out.println("Found films " + foundFilms);
-    }
-
-    private void getFilmCase() {
-        System.out.println("Podaj tytuł");
-        final String title = input.next();
-        System.out.println("Podaj rok produkcji");
-        final int releaseYear = input.nextInt();
-        filmService.getFilm(title, releaseYear)
-                .ifPresentOrElse(
-                        film -> System.out.println("Znaleziono film " + film),
-                        () -> System.out.println("Film o tytule " + title + " i roku wydania " + releaseYear + " nie znaleziony!")
-                );
-    }
-
-    private void addFilmCase() {
-        System.out.println("Podaj tytuł");
-        final String title = input.next();
-        System.out.println("Podaj rok produkcji");
-        final int releaseYear = input.nextInt();
-        try {
-            filmService.addFilm(title, releaseYear);
-            System.out.println("Film " + title + " z roku " + releaseYear + " dodany!");
-        } catch (Exception e){
-            System.out.println("Ups...coś poszło nie tak. " + e.getMessage());
         }
     }
 
