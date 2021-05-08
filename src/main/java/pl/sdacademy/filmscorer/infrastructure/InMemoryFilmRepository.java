@@ -4,6 +4,7 @@ import pl.sdacademy.filmscorer.domain.Film;
 import pl.sdacademy.filmscorer.domain.FilmRepository;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class InMemoryFilmRepository implements FilmRepository {
@@ -19,6 +20,12 @@ public class InMemoryFilmRepository implements FilmRepository {
         } else {
             throw new DuplicatedKeyException("Film with title " + film.getTitle() + " released in " + film.getReleaseYear() + " already exists!");
         }
+    }
+
+    @Override
+    public List<Film> findAll() {
+        //TODO to implement
+        return null;
     }
 
     private String constructKey(Film film) {
