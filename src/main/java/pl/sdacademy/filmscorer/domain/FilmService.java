@@ -17,4 +17,9 @@ public class FilmService {
             throw new DuplicatedFilmException("Trying to add film that already exists", exception);
         }
     }
+
+    public Film getFilm(String title, int releaseYear) {
+        //TODO
+        return null;
+    }
 }

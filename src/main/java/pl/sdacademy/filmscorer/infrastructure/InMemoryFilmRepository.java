@@ -3,6 +3,7 @@ package pl.sdacademy.filmscorer.infrastructure;
 import pl.sdacademy.filmscorer.domain.Film;
 import pl.sdacademy.filmscorer.domain.FilmRepository;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,8 +25,7 @@ public class InMemoryFilmRepository implements FilmRepository {
 
     @Override
     public List<Film> findAll() {
-        //TODO to implement
-        return null;
+        return new ArrayList<>(films.values());
     }
 
     private String constructKey(Film film) {

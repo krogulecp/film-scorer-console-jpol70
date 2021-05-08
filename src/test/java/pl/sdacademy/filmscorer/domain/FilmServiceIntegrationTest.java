@@ -30,4 +30,14 @@ class FilmServiceIntegrationTest {
         final Film foundFilm = foundFilms.get(0);
         assertEquals(SampleFilm.defaultFilm(), foundFilm);
     }
+
+    @Test
+    void shouldAddFilmV2(){
+        //when
+        filmService.addFilm(SampleFilm.SAMPLE_FILM_TITLE, SampleFilm.SAMPLE_RELEASE_YEAR);
+
+        //then
+        final Film foundFilm = filmService.getFilm(SampleFilm.SAMPLE_FILM_TITLE, SampleFilm.SAMPLE_RELEASE_YEAR);
+        assertEquals(SampleFilm.defaultFilm(), foundFilm);
+    }
 }
