@@ -7,4 +7,6 @@ public interface FilmRepository {
     void saveOrThrowIfExists(Film film);
     List<Film> findAll();
     Optional<Film> findByTitleAndReleaseYear(String title, int releaseYear);
+    List<Film> findByTitle(String title);
 }
+

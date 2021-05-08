@@ -34,6 +34,12 @@ public class InMemoryFilmRepository implements FilmRepository {
         return Optional.ofNullable(films.get(constructKey(title, releaseYear)));
     }
 
+    @Override
+    public List<Film> findByTitle(String title) {
+        //TODO
+        return null;
+    }
+
     private String constructKey(Film film) {
         return film.getTitle() + film.getReleaseYear();
     }

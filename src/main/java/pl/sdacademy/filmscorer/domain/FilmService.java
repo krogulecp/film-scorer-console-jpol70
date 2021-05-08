@@ -2,6 +2,7 @@ package pl.sdacademy.filmscorer.domain;
 
 import pl.sdacademy.filmscorer.infrastructure.DuplicatedKeyException;
 
+import java.util.List;
 import java.util.Optional;
 
 public class FilmService {
@@ -22,5 +23,10 @@ public class FilmService {
 
     public Optional<Film> getFilm(String title, int releaseYear) {
         return filmRepository.findByTitleAndReleaseYear(title, releaseYear);
+    }
+
+    public List<Film> getFilmsByTitle(String title) {
+        //TODO
+        return null;
     }
 }

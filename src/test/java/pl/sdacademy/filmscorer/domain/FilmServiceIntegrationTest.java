@@ -43,4 +43,20 @@ class FilmServiceIntegrationTest {
         Assertions.assertTrue(foundFilm.isPresent());
         assertEquals(SampleFilm.defaultFilm(), foundFilm.get());
     }
+
+    @Test
+    void shouldGetFilmsByTitle(){
+        //given
+        filmService.addFilm(SampleFilm.SAMPLE_FILM_TITLE, SampleFilm.SAMPLE_RELEASE_YEAR);
+        filmService.addFilm(SampleFilm.SAMPLE_FILM_TITLE, 1990);
+        filmService.addFilm("Green mile", 1998);
+
+        //when
+        List<Film> films = filmService.getFilmsByTitle(SampleFilm.SAMPLE_FILM_TITLE);
+
+        //then
+        assertEquals(2, films.size());
+        assertEquals(SampleFilm.SAMPLE_FILM_TITLE, films.get(0).getTitle());
+        assertEquals(SampleFilm.SAMPLE_FILM_TITLE, films.get(1).getTitle());
+    }
 }
