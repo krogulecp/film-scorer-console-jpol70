@@ -1,7 +1,9 @@
 package pl.sdacademy.filmscorer.ui;
 
+import pl.sdacademy.filmscorer.domain.Film;
 import pl.sdacademy.filmscorer.domain.FilmService;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class UserInterface {
@@ -38,7 +40,10 @@ public class UserInterface {
     }
 
     private void getFilmsByTitleCase() {
-        //TODO
+        System.out.println("Podaj tytuł");
+        final String title = input.next();
+        final List<Film> foundFilms = filmService.getFilmsByTitle(title);
+        System.out.println("Found films " + foundFilms);
     }
 
     private void getFilmCase() {
