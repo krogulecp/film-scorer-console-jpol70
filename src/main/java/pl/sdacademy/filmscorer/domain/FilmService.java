@@ -26,7 +26,6 @@ public class FilmService {
     }
 
     public List<Film> getFilmsByTitle(String title) {
-        //TODO
-        return null;
+        return filmRepository.findByTitle(title);
     }
 }

@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class InMemoryFilmRepository implements FilmRepository {
 
@@ -36,8 +37,9 @@ public class InMemoryFilmRepository implements FilmRepository {
 
     @Override
     public List<Film> findByTitle(String title) {
-        //TODO
-        return null;
+        return films.values().stream()
+                .filter(film -> film.getTitle().equals(title))
+                .collect(Collectors.toList());
     }
 
     private String constructKey(Film film) {
