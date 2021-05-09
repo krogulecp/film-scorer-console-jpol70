@@ -45,8 +45,5 @@ public class FilmService {
         film.setScore(newScore);
         //chcemy na koniec zapisać w repozytorium film ze zmianami
         filmRepository.update(film);
-
-        // a. film, który znaleźliśmy ma score == null i wtedy dodajemy nowy
-        // b. film ma już score i wtedy chcemy zaktualizować istniejący
     }
 }

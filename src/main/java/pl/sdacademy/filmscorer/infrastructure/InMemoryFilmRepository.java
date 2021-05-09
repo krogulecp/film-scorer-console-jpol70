@@ -51,7 +51,12 @@ public class InMemoryFilmRepository implements FilmRepository {
 
     @Override
     public void update(Film film) {
-        //TODO zaktualizować film
+        final boolean filmIsInRepository = films.values().contains(film);
+        if (filmIsInRepository){
+            films.put(constructKey(film), film);
+        } else {
+            throw new KeyNotFoundException("Cannot find " + film);
+        }
     }
 
     @Override
