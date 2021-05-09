@@ -42,6 +42,13 @@ public class Film {
         return Objects.hash(title, releaseYear);
     }
 
-
+    @Override
+    public String toString() {
+        return "Film{" +
+                "title='" + title + '\'' +
+                ", releaseYear=" + releaseYear +
+                ", score=" + score +
+                '}';
+    }
 }
 

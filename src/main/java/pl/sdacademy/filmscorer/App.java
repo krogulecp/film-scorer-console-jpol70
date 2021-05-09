@@ -4,6 +4,7 @@ import pl.sdacademy.filmscorer.domain.FilmService;
 import pl.sdacademy.filmscorer.domain.SimpleFilmScorer;
 import pl.sdacademy.filmscorer.infrastructure.InMemoryFilmRepository;
 import pl.sdacademy.filmscorer.ui.AddFilmCaseHandler;
+import pl.sdacademy.filmscorer.ui.AddScoreCaseHandler;
 import pl.sdacademy.filmscorer.ui.GetFilmCaseHandler;
 import pl.sdacademy.filmscorer.ui.GetFilmsByReleaseYearCaseHandler;
 import pl.sdacademy.filmscorer.ui.GetFilmsByTitleCaseHandler;
@@ -22,7 +23,8 @@ public class App {
                         new GetFilmsByTitleCaseHandler(scanner, filmService),
                         new GetFilmCaseHandler(scanner, filmService),
                         new AddFilmCaseHandler(scanner, filmService),
-                        new GetFilmsByReleaseYearCaseHandler(scanner, filmService)
+                        new GetFilmsByReleaseYearCaseHandler(scanner, filmService),
+                        new AddScoreCaseHandler(scanner, filmService)
                 )
         );
         userInterface.start();

@@ -20,7 +20,7 @@ public class Score {
     @Override
     public String toString() {
         return "Score{" +
-                "value=" + value +
+                "value=" + value + //TODO ta wartość powinna być z dokładnością do dwóch miejsc po przecinku
                 ", count=" + count +
                 '}';
     }
