@@ -5,6 +5,7 @@ import java.util.Objects;
 public class Film {
     private final String title;
     private final int releaseYear;
+    private Score score;
 
     public Film(String title, int releaseYear) {
         this.title = title;
@@ -17,6 +18,14 @@ public class Film {
 
     public int getReleaseYear() {
         return releaseYear;
+    }
+
+    public Score getScore(){
+        return score;
+    }
+
+    public void setScore(Score score){
+        this.score = score;
     }
 
     @Override
@@ -38,6 +47,7 @@ public class Film {
         return "Film{" +
                 "title='" + title + '\'' +
                 ", releaseYear=" + releaseYear +
+                ", score=" + score +
                 '}';
     }
 }

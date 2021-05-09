@@ -9,6 +9,8 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class FilmServiceIntegrationTest {
 
@@ -87,5 +89,25 @@ class FilmServiceIntegrationTest {
                 .orElse(null);
         assertEquals(SampleFilm.defaultFilm(), film1);
         assertEquals(new Film("Git Ekipa", releaseYear), film2);
+    }
+
+    @Test
+    void shouldAddFilmScore() {
+        //given
+        //dodajemy film
+        final int score = 7;
+        filmService.addFilm(SampleFilm.SAMPLE_FILM_TITLE, SampleFilm.SAMPLE_RELEASE_YEAR);
+
+        //when
+        //dodajemy ocenę dla tego filmu
+        filmService.addFilmScore(SampleFilm.SAMPLE_FILM_TITLE, SampleFilm.SAMPLE_RELEASE_YEAR, score);
+
+        //then
+        // sprawdzamy czy ocena została uwzględniona
+        final Optional<Film> film = filmService.getFilm(SampleFilm.SAMPLE_FILM_TITLE, SampleFilm.SAMPLE_RELEASE_YEAR);
+        assertTrue(film.isPresent());
+        assertNotNull(film.get().getScore());
+        assertEquals(Integer.valueOf(score).doubleValue(), film.get().getScore().getValue());
+        assertEquals(1, film.get().getScore().getCount());
     }
 }

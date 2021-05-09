@@ -33,4 +33,8 @@ public class FilmService {
         //TODO dodać walidację na rok - powinien on być w odpowiednim zakresie -> od 1900 do bieżącego roku (plus test)
         return filmRepository.findFilmByReleaseYear(releaseYear);
     }
+
+    public void addFilmScore(String title, int releaseYear, int score) {
+
+    }
 }
