@@ -35,6 +35,10 @@ public class FilmService {
     }
 
     public void addFilmScore(String title, int releaseYear, int score) {
-
+        //znaleźć film o danym tytule i roku produkcji
+        //obsłużyć przypadek, kiedy chcemy dodać ocenę dla nieistniejącego filmu
+        // a. film, który znaleźliśmy ma score == null i wtedy dodajemy nowy
+        // b. film ma już score i wtedy chcemy zaktualizować istniejący
+        //chcemy na koniec zapisać w repozytorium film ze zmianami
     }
 }
