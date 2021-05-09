@@ -1,6 +1,7 @@
 package pl.sdacademy.filmscorer;
 
 import pl.sdacademy.filmscorer.domain.FilmService;
+import pl.sdacademy.filmscorer.domain.SimpleFilmScorer;
 import pl.sdacademy.filmscorer.infrastructure.InMemoryFilmRepository;
 import pl.sdacademy.filmscorer.ui.AddFilmCaseHandler;
 import pl.sdacademy.filmscorer.ui.GetFilmCaseHandler;
@@ -13,7 +14,7 @@ import java.util.Set;
 
 public class App {
     public static void main(String[] args) {
-        final FilmService filmService = new FilmService(new InMemoryFilmRepository());
+        final FilmService filmService = new FilmService(new InMemoryFilmRepository(), new SimpleFilmScorer());
         final Scanner scanner = new Scanner(System.in);
         final UserInterface userInterface = new UserInterface(
                 scanner,

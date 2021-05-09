@@ -1,5 +1,6 @@
 package pl.sdacademy.filmscorer.domain;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -16,11 +17,18 @@ class FilmServiceIntegrationTest {
 
     private FilmService filmService;
     private FilmRepository filmRepository;
+    private FilmScorer filmScorer;
 
     @BeforeEach
     void setUp() {
         filmRepository = new InMemoryFilmRepository();
-        filmService = new FilmService(filmRepository);
+        filmScorer = new SimpleFilmScorer();
+        filmService = new FilmService(filmRepository, filmScorer);
+    }
+
+    @AfterEach
+    void tearDown() {
+        filmRepository.deleteAll();
     }
 
     @Test

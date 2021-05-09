@@ -11,11 +11,13 @@ class FilmServiceTest {
 
     private FilmService filmService;
     private FilmRepository filmRepository;
+    private FilmScorer filmScorer;
 
     @BeforeEach
     void setup(){
         filmRepository = Mockito.mock(FilmRepository.class);
-        filmService = new FilmService(filmRepository);
+        filmScorer = Mockito.mock(FilmScorer.class);
+        filmService = new FilmService(filmRepository, filmScorer);
     }
 
     @Test

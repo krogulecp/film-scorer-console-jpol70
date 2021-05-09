@@ -8,9 +8,11 @@ import java.util.Optional;
 public class FilmService {
 
     private final FilmRepository filmRepository;
+    private final FilmScorer filmScorer;
 
-    public FilmService(FilmRepository filmRepository) {
+    public FilmService(FilmRepository filmRepository, FilmScorer filmScorer) {
         this.filmRepository = filmRepository;
+        this.filmScorer = filmScorer;
     }
 
     public void addFilm(String title, int releaseYear) {
@@ -37,8 +39,14 @@ public class FilmService {
     public void addFilmScore(String title, int releaseYear, int score) {
         //znaleźć film o danym tytule i roku produkcji
         //obsłużyć przypadek, kiedy chcemy dodać ocenę dla nieistniejącego filmu
+        final Film film = filmRepository.findByTitleAndReleaseYear(title, releaseYear)
+                .orElseThrow(() -> new FilmNotFoundException("Nie znaleziono filmu " + title + " Brak możliwości oceny!!!"));
+        final Score newScore = filmScorer.calculate(film.getScore(), score);
+        film.setScore(newScore);
+        //chcemy na koniec zapisać w repozytorium film ze zmianami
+        filmRepository.update(film);
+
         // a. film, który znaleźliśmy ma score == null i wtedy dodajemy nowy
         // b. film ma już score i wtedy chcemy zaktualizować istniejący
-        //chcemy na koniec zapisać w repozytorium film ze zmianami
     }
 }

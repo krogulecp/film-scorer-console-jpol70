@@ -49,6 +49,16 @@ public class InMemoryFilmRepository implements FilmRepository {
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public void update(Film film) {
+        //TODO zaktualizować film
+    }
+
+    @Override
+    public void deleteAll() {
+        films.clear();
+    }
+
     private String constructKey(Film film) {
         return film.getTitle() + film.getReleaseYear();
     }

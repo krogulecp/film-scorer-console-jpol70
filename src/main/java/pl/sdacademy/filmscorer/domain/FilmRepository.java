@@ -9,5 +9,7 @@ public interface FilmRepository {
     Optional<Film> findByTitleAndReleaseYear(String title, int releaseYear);
     List<Film> findByTitle(String title);
     List<Film> findFilmByReleaseYear(int releaseYear);
+    void update(Film film);
+    void deleteAll();
 }
 
