@@ -4,6 +4,7 @@ import pl.sdacademy.filmscorer.domain.FilmService;
 import pl.sdacademy.filmscorer.infrastructure.InMemoryFilmRepository;
 import pl.sdacademy.filmscorer.ui.AddFilmCaseHandler;
 import pl.sdacademy.filmscorer.ui.GetFilmCaseHandler;
+import pl.sdacademy.filmscorer.ui.GetFilmsByReleaseYearCaseHandler;
 import pl.sdacademy.filmscorer.ui.GetFilmsByTitleCaseHandler;
 import pl.sdacademy.filmscorer.ui.UserInterface;
 
@@ -19,8 +20,8 @@ public class App {
                 Set.of(
                         new GetFilmsByTitleCaseHandler(scanner, filmService),
                         new GetFilmCaseHandler(scanner, filmService),
-                        new AddFilmCaseHandler(scanner, filmService)
-                        // TODO zrobienie ścieżki dla wyciągnięcia wszystkich filmów po roku produkcji
+                        new AddFilmCaseHandler(scanner, filmService),
+                        new GetFilmsByReleaseYearCaseHandler(scanner, filmService)
                 )
         );
         userInterface.start();

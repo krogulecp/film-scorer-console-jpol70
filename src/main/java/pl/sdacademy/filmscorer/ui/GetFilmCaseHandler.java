@@ -13,7 +13,7 @@ public class GetFilmCaseHandler extends CaseHandler {
     @Override
     void handle() {
         System.out.println("Podaj tytuł");
-        final String title = scanner.next();
+        final String title = scanner.nextLine();
         System.out.println("Podaj rok produkcji");
         final int releaseYear = scanner.nextInt();
         filmService.getFilm(title, releaseYear)

@@ -17,6 +17,7 @@ public class UserInterface {
         System.out.println("Witam w aplikacji do oceny filmów!");
         while (shouldContinue) {
             System.out.println("Co chciałbyś zrobić:");
+            //TODO posortować case handlery po ID, tak, żeby wyświetlały się w kolejności od 1 w górę
             caseHandlers.forEach(handler -> System.out.println(handler.getId() + " -> " + handler.getTitle()));
             final int selectedOption = input.nextInt();
             //TODO zweryfikować input i jeśli nie będzie liczbą wypisać odpowiedni komunikat
