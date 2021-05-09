@@ -42,6 +42,12 @@ public class InMemoryFilmRepository implements FilmRepository {
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public List<Film> findFilmByReleaseYear(int releaseYear) {
+        //TODO
+        return null;
+    }
+
     private String constructKey(Film film) {
         return film.getTitle() + film.getReleaseYear();
     }

@@ -8,5 +8,6 @@ public interface FilmRepository {
     List<Film> findAll();
     Optional<Film> findByTitleAndReleaseYear(String title, int releaseYear);
     List<Film> findByTitle(String title);
+    List<Film> findFilmByReleaseYear(int releaseYear);
 }
 

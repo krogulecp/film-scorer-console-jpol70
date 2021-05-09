@@ -19,6 +19,7 @@ public class UserInterface {
             System.out.println("Co chciałbyś zrobić:");
             caseHandlers.forEach(handler -> System.out.println(handler.getId() + " -> " + handler.getTitle()));
             final int selectedOption = input.nextInt();
+            //TODO zweryfikować input i jeśli nie będzie liczbą wypisać odpowiedni komunikat
             caseHandlers.stream()
                     .filter(handler -> handler.getId() == selectedOption).findFirst()
                     .ifPresentOrElse(CaseHandler::handle, () -> System.out.println("Wybrano błędną opcję"));

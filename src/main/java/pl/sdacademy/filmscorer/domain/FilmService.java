@@ -28,4 +28,9 @@ public class FilmService {
     public List<Film> getFilmsByTitle(String title) {
         return filmRepository.findByTitle(title);
     }
+
+    public List<Film> getFilmsByReleaseYear(int releaseYear) {
+        //TODO dodać walidację na rok - powinien on być w odpowiednim zakresie -> od 1900 do bieżącego roku
+        return filmRepository.findFilmByReleaseYear(releaseYear);
+    }
 }

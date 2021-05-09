@@ -59,4 +59,33 @@ class FilmServiceIntegrationTest {
         assertEquals(SampleFilm.SAMPLE_FILM_TITLE, films.get(0).getTitle());
         assertEquals(SampleFilm.SAMPLE_FILM_TITLE, films.get(1).getTitle());
     }
+
+    @Test
+    void shouldGetFilmsByReleaseYear(){
+        //given
+        //dodać kilka filmów z różnymi datami produkcji + dwa z taką samą datą
+        final int releaseYear = 1980;
+        filmService.addFilm(SampleFilm.SAMPLE_FILM_TITLE, releaseYear);
+        filmService.addFilm("Git Ekipa", releaseYear);
+        filmService.addFilm("Green mile", 1998);
+
+        //when
+        // wyszukujemy film z datą produkcji która jest zdublowana
+        List<Film> foundFilms = filmService.getFilmsByReleaseYear(releaseYear);
+
+        //then
+        // sprawdzimy czy dostaliśmy dwa filmy
+        assertEquals(2, foundFilms.size());
+        // sprawdzimy czy dane tych filmów są poprawne
+        final Film film1 = foundFilms.stream()
+                .filter(film -> film.getTitle().equals(SampleFilm.SAMPLE_FILM_TITLE))
+                .findFirst()
+                .orElse(null);
+        final Film film2 = foundFilms.stream()
+                .filter(film -> film.getTitle().equals("Git Ekipa"))
+                .findFirst()
+                .orElse(null);
+        assertEquals(SampleFilm.defaultFilm(), film1);
+        assertEquals(new Film("Git Ekipa", releaseYear), film2);
+    }
 }
