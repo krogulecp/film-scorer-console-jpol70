@@ -30,7 +30,7 @@ public class FilmService {
     }
 
     public List<Film> getFilmsByReleaseYear(int releaseYear) {
-        //TODO dodać walidację na rok - powinien on być w odpowiednim zakresie -> od 1900 do bieżącego roku
+        //TODO dodać walidację na rok - powinien on być w odpowiednim zakresie -> od 1900 do bieżącego roku (plus test)
         return filmRepository.findFilmByReleaseYear(releaseYear);
     }
 }
