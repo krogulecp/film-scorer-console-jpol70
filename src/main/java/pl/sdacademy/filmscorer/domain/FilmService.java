@@ -21,6 +21,8 @@ public class FilmService {
             filmRepository.saveOrThrowIfExists(new Film(title, releaseYear));
         } catch (DuplicatedKeyException exception){
             throw new DuplicatedFilmException("Trying to add film that already exists", exception);
+        } catch (Exception e){
+            System.out.println("");
         }
     }
 

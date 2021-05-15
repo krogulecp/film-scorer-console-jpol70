@@ -96,9 +96,9 @@ public class FilmEntity {
         return Objects.hash(id);
     }
 
-    public static Film toFilm(FilmEntity filmEntity) {
-        Film film = new Film(filmEntity.getTitle(), filmEntity.getReleaseYear());
-        film.setScore(new Score(filmEntity.getActualScore(), Long.valueOf(filmEntity.getScoresCount()).intValue()));
-        return new Film(filmEntity.getTitle(), filmEntity.getReleaseYear());
+    public Film toFilm() {
+        Film film = new Film(title, releaseYear);
+        film.setScore(new Score(actualScore, Long.valueOf(scoresCount).intValue()));
+        return film;
     }
 }
