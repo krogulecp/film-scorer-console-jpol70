@@ -1,0 +1,11 @@
+CREATE DATABASE IF NOT EXISTS `film-scorer`;
+USE `film-scorer`;
+
+CREATE TABLE films (
+        id varchar(200) NOT NULL,
+        title varchar(255) NOT NULL,
+        release_year int (4) NOT NULL,
+        scores_count int NOT NULL,
+        actual_score double NOT NULL,
+        PRIMARY KEY (id)
+);

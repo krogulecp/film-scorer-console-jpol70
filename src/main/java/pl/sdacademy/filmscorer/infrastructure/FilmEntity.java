@@ -1,5 +1,8 @@
 package pl.sdacademy.filmscorer.infrastructure;
 
+import pl.sdacademy.filmscorer.domain.Film;
+import pl.sdacademy.filmscorer.domain.Score;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -25,6 +28,20 @@ public class FilmEntity {
 
     @Column(name = "actual_score")
     private double actualScore;
+
+    public static FilmEntity fromDomain(Film film) {
+        FilmEntity filmEntity = new FilmEntity();
+        filmEntity.setId(film.getTitle() + film.getReleaseYear());
+        filmEntity.setTitle(film.getTitle());
+        filmEntity.setReleaseYear(film.getReleaseYear());
+
+        if(film.getScore() != null) {
+            filmEntity.setScoresCount(film.getScore().getCount());
+            filmEntity.setActualScore(film.getScore().getValue());
+        }
+
+        return filmEntity;
+    }
 
     public String getId() {
         return id;
@@ -77,5 +94,11 @@ public class FilmEntity {
     @Override
     public int hashCode() {
         return Objects.hash(id);
+    }
+
+    public static Film toFilm(FilmEntity filmEntity) {
+        Film film = new Film(filmEntity.getTitle(), filmEntity.getReleaseYear());
+        film.setScore(new Score(filmEntity.getActualScore(), Long.valueOf(filmEntity.getScoresCount()).intValue()));
+        return new Film(filmEntity.getTitle(), filmEntity.getReleaseYear());
     }
 }
