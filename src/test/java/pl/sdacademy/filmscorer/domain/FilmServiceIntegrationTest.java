@@ -6,11 +6,14 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import pl.sdacademy.filmscorer.infrastructure.InMemoryFilmRepository;
 
+import java.time.Instant;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class FilmServiceIntegrationTest {
@@ -117,5 +120,23 @@ class FilmServiceIntegrationTest {
         assertNotNull(film.get().getScore());
         assertEquals(Integer.valueOf(score).doubleValue(), film.get().getScore().getValue());
         assertEquals(1, film.get().getScore().getCount());
+    }
+
+    @Test
+    void shouldThrowExceptionWhenUserTryToFindTooOldFilm(){
+        //given
+        final int releaseYear = 1899;
+
+        //when and then
+        assertThrows(InvalidFilmException.class, () -> filmService.getFilmsByReleaseYear(releaseYear));
+    }
+
+    @Test
+    void shouldThrowExceptionWhenUserTryToFindFilmWithFutureReleaseYear(){
+        //given
+        final int releaseYear = LocalDate.now().getYear() + 1;
+
+        //when and then
+        assertThrows(InvalidFilmException.class, () -> filmService.getFilmsByReleaseYear(releaseYear));
     }
 }

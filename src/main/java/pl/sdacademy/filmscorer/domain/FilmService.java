@@ -2,6 +2,7 @@ package pl.sdacademy.filmscorer.domain;
 
 import pl.sdacademy.filmscorer.infrastructure.DuplicatedKeyException;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,7 +33,9 @@ public class FilmService {
     }
 
     public List<Film> getFilmsByReleaseYear(int releaseYear) {
-        //TODO dodać walidację na rok - powinien on być w odpowiednim zakresie -> od 1900 do bieżącego roku (plus test)
+        if (releaseYear < 1900 || releaseYear > LocalDate.now().getYear()){
+            throw new InvalidFilmException("Podany rok produkcji jest niepoprawny");
+        }
         return filmRepository.findFilmByReleaseYear(releaseYear);
     }
 
