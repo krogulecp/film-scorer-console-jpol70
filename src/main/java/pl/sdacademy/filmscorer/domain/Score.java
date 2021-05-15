@@ -1,5 +1,7 @@
 package pl.sdacademy.filmscorer.domain;
 
+import java.text.DecimalFormat;
+
 public class Score {
     private final double value;
     private final int count;
@@ -20,7 +22,7 @@ public class Score {
     @Override
     public String toString() {
         return "Score{" +
-                "value=" + value + //TODO ta wartość powinna być z dokładnością do dwóch miejsc po przecinku
+                "value=" + new DecimalFormat("#.##").format(value) +
                 ", count=" + count +
                 '}';
     }

@@ -16,8 +16,11 @@ public class GetFilmsByReleaseYearCaseHandler extends CaseHandler{
         System.out.println("Podaj rok produkcji");
         final int releaseYear = scanner.nextInt();
         final List<Film> foundFilms = filmService.getFilmsByReleaseYear(releaseYear);
-        System.out.println("Znaleziono filmy: ");
-        foundFilms.forEach(System.out::println);
-        //TODO W przypadku nie znalezienia żadnego filmu wypisać komunikat: "Nie znaleziono żadnego filmu"
+        if (foundFilms.isEmpty()){
+            System.out.println("Nie znaleziono żadnego filmu!");
+        } else {
+            System.out.println("Znaleziono filmy: ");
+            foundFilms.forEach(System.out::println);
+        }
     }
 }

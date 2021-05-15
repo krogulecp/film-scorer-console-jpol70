@@ -1,7 +1,9 @@
 package pl.sdacademy.filmscorer.ui;
 
+import java.util.Comparator;
 import java.util.Scanner;
 import java.util.Set;
+import java.util.TreeSet;
 
 public class UserInterface {
     private final Scanner input;
@@ -17,13 +19,18 @@ public class UserInterface {
         System.out.println("Witam w aplikacji do oceny filmów!");
         while (shouldContinue) {
             System.out.println("Co chciałbyś zrobić:");
-            //TODO posortować case handlery po ID, tak, żeby wyświetlały się w kolejności od 1 w górę
-            caseHandlers.forEach(handler -> System.out.println(handler.getId() + " -> " + handler.getTitle()));
-            final int selectedOption = input.nextInt();
-            //TODO zweryfikować input i jeśli nie będzie liczbą wypisać odpowiedni komunikat
             caseHandlers.stream()
-                    .filter(handler -> handler.getId() == selectedOption).findFirst()
-                    .ifPresentOrElse(CaseHandler::handle, () -> System.out.println("Wybrano błędną opcję"));
+                    .sorted(Comparator.comparingInt(CaseHandler::getId))
+                    .forEach(handler -> System.out.println(handler.getId() + " -> " + handler.getTitle()));
+            final String selectedOption = input.next();
+            try {
+                final int selectedOptionNumber = Integer.valueOf(selectedOption);
+                this.caseHandlers.stream()
+                        .filter(handler -> handler.getId() == selectedOptionNumber).findFirst()
+                        .ifPresentOrElse(CaseHandler::handle, () -> System.out.println("Wybrano błędną opcję"));
+            } catch (Exception exception){
+                System.out.println("Błąd podczas wybierania opcji. " + exception.getMessage());
+            }
 
             shouldContinue = shouldContinue();
         }
