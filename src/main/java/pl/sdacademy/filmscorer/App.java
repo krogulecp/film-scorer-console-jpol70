@@ -1,8 +1,13 @@
 package pl.sdacademy.filmscorer;
 
+import org.hibernate.SessionFactory;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import org.hibernate.cfg.Configuration;
+import org.hibernate.service.ServiceRegistry;
 import pl.sdacademy.filmscorer.domain.FilmService;
 import pl.sdacademy.filmscorer.domain.SimpleFilmScorer;
-import pl.sdacademy.filmscorer.infrastructure.InMemoryFilmRepository;
+import pl.sdacademy.filmscorer.infrastructure.FilmEntity;
+import pl.sdacademy.filmscorer.infrastructure.FilmJpaRepository;
 import pl.sdacademy.filmscorer.ui.AddFilmCaseHandler;
 import pl.sdacademy.filmscorer.ui.AddScoreCaseHandler;
 import pl.sdacademy.filmscorer.ui.GetFilmCaseHandler;
@@ -15,7 +20,7 @@ import java.util.Set;
 
 public class App {
     public static void main(String[] args) {
-        final FilmService filmService = new FilmService(new InMemoryFilmRepository(), new SimpleFilmScorer());
+        final FilmService filmService = new FilmService(new FilmJpaRepository(createSessionFactory()), new SimpleFilmScorer());
         final Scanner scanner = new Scanner(System.in);
         final UserInterface userInterface = new UserInterface(
                 scanner,
@@ -28,5 +33,17 @@ public class App {
                 )
         );
         userInterface.start();
+    }
+
+    private static SessionFactory createSessionFactory() {
+        Configuration configObj = new Configuration();
+        configObj.configure("hibernate.cfg.xml");
+        configObj.addAnnotatedClass(FilmEntity.class);
+
+        ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
+                .applySettings(configObj.getProperties())
+                .build();
+
+        return configObj.buildSessionFactory(serviceRegistry);
     }
 }
