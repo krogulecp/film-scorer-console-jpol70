@@ -4,7 +4,7 @@ public class SimpleFilmScorer implements FilmScorer{
     @Override
     public Score calculate(Score currentScore, int scoreToAdd) {
         // a. film, który znaleźliśmy ma score == null i wtedy dodajemy nowy
-        if (currentScore == null) {
+        if (currentScore == null || currentScore.getCount() == 0) {
             return new Score(scoreToAdd, 1);
         }
         // b. film ma już score i wtedy chcemy zaktualizować istniejący

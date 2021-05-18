@@ -44,6 +44,9 @@ public class FilmService {
     public void addFilmScore(String title, int releaseYear, int score) {
         //znaleźć film o danym tytule i roku produkcji
         //obsłużyć przypadek, kiedy chcemy dodać ocenę dla nieistniejącego filmu
+        if (score < 1 || score > 10){
+            throw new InvalidScoreException("Ocena musi znajdować się w przedziale od 1 do 10");
+        }
         final Film film = filmRepository.findByTitleAndReleaseYear(title, releaseYear)
                 .orElseThrow(() -> new FilmNotFoundException("Nie znaleziono filmu " + title + " Brak możliwości oceny!!!"));
         final Score newScore = filmScorer.calculate(film.getScore(), score);
